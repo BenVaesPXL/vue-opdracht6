@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="col">
     <button @click="increaseCounter()">{{ counter }}</button>
     <p>{{ goalAchieved }}</p>
   </div>
@@ -32,4 +32,14 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 25%;
+  margin: 0 auto;
+  border: 1px solid black;
+  padding: 2rem;
+}
+</style>
