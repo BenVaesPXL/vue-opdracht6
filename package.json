@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "js-confetti": "^0.12.0",
     "moment": "^2.30.1",
     "vue": "^3.3.4"
   },

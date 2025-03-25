@@ -1,89 +1,35 @@
-<script>
-  import moment from 'moment'
-
-  export default {
-    data() {
-      return {
-        name: '',
-        counter: 0
-      }
-    },
-
-    computed: {
-      outputFullNameComputed() {
-        console.log('Computed');
-        if (this.name === '') {
-          return ''
-        }
-        return `${this.name} ${moment().format('hh:mm:ss')}`
-      },
-    },
-
-    methods: {
-      outputFullName() {
-        console.log('Methode');
-        if (this.name === '') {
-          return ''
-        }
-        return `${this.name} ${moment().format('hh:mm:ss')}`
-      },
-
-      addOne() {
-        this.counter += 1
-      }
-    }
-  }
-</script>
-
 <template>
-  <div class="container">
-    <div class="form__field">
-      <label for="name">Naam:</label>
-      <input type="text" id="name" v-model="name">
-    </div>
-    <div class="result">
-      <h3>Volledige naam met methode</h3>
-      <p>{{ outputFullName() }}</p>
-    </div>
-    <div class="result">
-      <h3>Volledige naam met computed property</h3>
-      <p>{{ outputFullNameComputed }}</p>
-    </div>
-    <div class="result">
-      <h3>Naam</h3>
-      <p>{{ name }}</p>
-    </div>
-    <div class="result">
-      <h3>Teller</h3>
-      <p>{{ counter }}</p>
-      <button @click="addOne()">Tel 1 bij</button>
-    </div>
+  <div>
+    <button @click="increaseCounter()">{{ counter }}</button>
+    <p>{{ goalAchieved }}</p>
   </div>
 </template>
+<script>
+import JSConfetti from "js-confetti";
+import { computed } from "vue";
 
-<style>
-.container {
-  width: 75%;
-  margin: auto;
-  padding-bottom: 5rem;
-}
-.form__field {
-  display: flex;
-  flex-direction: column;
-  margin: 2rem auto;
-  padding: 1rem;
-  width: 50%;
-}
-
-.form__field input {
-  width: 100%;
-}
-
-.result {
-  width: 50%;
-  border: 1px solid #0F0F0F;
-  border-radius: 5px;
-  margin: 2rem auto;
-  padding: 1rem;
-}
-</style>
+export default {
+  computed: {
+    goalAchieved() {
+      if (this.counter >= 10) {
+        this.JSConfetti.addConfetti();
+        return "Doel bereikt";
+      } else {
+        return "klik nog meer";
+      }
+    },
+  },
+  data() {
+    return {
+      counter: 0,
+      JSConfetti: new JSConfetti(),
+    };
+  },
+  methods: {
+    increaseCounter() {
+      this.counter++;
+    },
+  },
+};
+</script>
+<style></style>
